@@ -1,0 +1,124 @@
+#include <iostream>
+
+using namespace std;
+
+const int NUM_CARTUCHOS = 53;
+const char LETRAS [53] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
+void imprimirPalabra0(int cartuchos[]) {
+  string palabra;
+   cout<<"Ingrese una palabra: "<<endl;
+    cin>>palabra;
+     string resultado = "";
+      for(char letra : palabra) {
+       int indice = -1;
+        for (int i = 0; i < NUM_CARTUCHOS; i++) {
+         if (letra == LETRAS[i]) {
+          indice = i;
+           break;
+  }
+}
+  if(indice != -1 && cartuchos[indice] > 0) {
+    resultado += letra;
+     cartuchos[indice]--;
+    } 
+    else {
+     resultado += "-";
+    }
+  }
+    cout<< resultado<< endl;
+}
+
+void tintaNecesaria0(int cartuchos[]) {
+    string palabra;
+    cout << "Ingrese una palabra: ";
+    cin >> palabra;
+    int tinta_necesaria = 0;
+    for (char letra : palabra) {
+        if (isupper(letra)) {
+            tinta_necesaria += 2;
+        } else {
+            tinta_necesaria += 1;
+        }
+    }
+    int tinta_total = 0;
+    for (int i = 0; i < NUM_CARTUCHOS; i++) {
+        tinta_total += cartuchos[i];
+    }
+    if (tinta_total >= tinta_necesaria) {
+        cout << "Se necesitan " << tinta_necesaria << " unidades de tinta." << endl;
+    } else {
+        cout << "No se puede imprimir." << endl;
+    }
+}
+
+void buscarCartucho0(int cartuchos[]) {
+    char letra;
+    cout << "Ingrese una letra: ";
+    cin >> letra;
+    for (int i = 0; i < NUM_CARTUCHOS; i++) {
+        if (letra == LETRAS[i]) {
+            cout << "Quedan " << cartuchos[i] << " unidades de tinta." << endl;
+            return;
+        }
+    }
+    cout << "Cartucho no encontrado." << endl;
+}
+
+void vaciarCartucho0(int cartuchos[]) {
+    for (int i = 0; i < NUM_CARTUCHOS; i++) {
+        cartuchos[i] = 0;
+    }
+    cout << "Todos los cartuchos han sido vaciados." << endl;
+}
+
+void recargarImpresora0(int cartuchos[]) {
+    for (int i = 0; i < NUM_CARTUCHOS; i++) {
+        cartuchos[i] = 50;
+    }
+    cout << "Todos los cartuchos han sido recargados." << endl;
+}
+
+int main() {
+ int cartuchos[NUM_CARTUCHOS] = {50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50};
+  while (true) {
+   int opcion;
+    cout<<"Escoja la opcion que desea realizar: "<<endl; 
+    cout<<"1. Imprimir palabra: "<<endl;
+    cout<<"2. Tinta necesaria: "<<endl;
+    cout<<"3. Buscar cartucho: "<<endl;
+    cout<<"4. Vaciar cartucho: "<<endl;
+    cout<<"5. Recargar impresora: "<<endl;
+    cout<<"6. Salir: "<<endl;
+    cin>>opcion;
+      switch (opcion) {
+        case 1:
+         imprimirPalabra0(cartuchos);
+          break;
+
+        case 2:
+         tintaNecesaria0(cartuchos);
+          break;
+
+        case 3:
+         buscarCartucho0(cartuchos);
+          break;
+
+        case 4:
+         vaciarCartucho0(cartuchos);
+          break;
+
+        case 5:
+         recargarImpresora0(cartuchos);
+          break;
+
+        case 6:
+         return 0;
+          break;
+
+        default:
+         cout<<"Opcion invalida"<<endl;
+          break;
+    }
+  }
+}
